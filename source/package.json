@@ -1,0 +1,34 @@
+{
+    "name": "jacobgable_com"
+  , "description": "The web site of Jacob Gable"
+  , "author": "Jacob Gable <jacob.gable@gmail.com>"
+  , "version": "0.1.0"
+  , "private": true
+  , "dependencies": {
+      "express": "3.0.0alpha4" 
+    , "jade": "0.26.0"
+    , "connect-assets": "2.2.1"
+    , "stylus": "0.27.0"
+    , "nib": "0.4.1"
+    , "markdown": "0.3.1"
+    , "marked": "0.2.x"
+    , "mongoose": "2.7.x"
+    , "slug": "0.2.x"
+    , "logging": "2.0.x"
+  }
+  , "scripts": {
+    "start": "node server.js",
+    "initMottos": "node data.js mottos",
+    "initPosts": "node data.js posts",
+    "test": "mocha --require should --compilers coffee:coffee-script --colors"
+  }
+  , "devDependencies": {
+    "coffee-script": "*"
+    , "mocha": "*"
+    , "should": "*"
+    , "request": "*"
+    , "supervisor": "*"
+  }
+  , "engine": "node ~> 0.6.17"
+  , "license": "MIT or MsPL"
+}

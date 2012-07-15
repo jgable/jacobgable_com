@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  article
+    h2 
+      a(href="/blog/#{post.slug}", title="#{post.title}") #{post.title}
+    .content #{post.content}
+
+  

@@ -1,0 +1,27 @@
+extends admin_layout
+
+block content
+  #drafts.col
+    h1 Drafts
+      a.button(href="/blog/draft") New Draft
+    form#new_post(action="/blog/draft", method="post", class="new_post")
+      input#post_title(name="post_title", placeholder="New Draft Title...", size="30", type="text")
+    ul
+      each post in drafts
+        li(id="post-#{post.id}") 
+          h3 
+            a(href="/blog/edit/#{post.slug}", title="#{post.title}") #{post.title}
+            span.links
+              a.admin_view(href='#{"/blog/" + post.slug}', title='#{post.title}') View
+              a.admin_delete(href='#{"/blog/delete/" + post.slug}', title="Delete", rel="nofollow") X
+
+  #published.col
+    h1 published
+    ul
+      each post in published
+        li(id="post-#{post.id}")
+          h3 
+            a(href="/blog/edit/#{post.slug}", title="#{post.title}") #{post.title}
+            span.links
+              a.admin_view(href='#{"/blog/" + post.slug}', title='#{post.title}') View
+              a.admin_delete(href='#{"/blog/delete/" + post.slug}', title="Delete", rel="nofollow") X

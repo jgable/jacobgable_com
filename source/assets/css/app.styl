@@ -1,0 +1,102 @@
+@import 'nib'
+
+// Stylus Syntax Refresher: http://learnboost.github.com/stylus/
+
+// Variables
+
+text_gray = #565656;
+text_black = #000;
+triangle_size = 11px;
+hilite_orange = #FF8832;
+
+// Common Styles
+
+.container
+  margin: 0 10px;
+
+// Header Styles 
+
+#siteHeader
+  color: text_gray;
+  text-align: center;
+
+  h2 
+    color: text_black;
+    margin: 10px 0 5px 0;
+
+  h2::selection, .userDescription::selection
+    background: hilite_orange;
+    color: white;
+  h2::-moz-selection, .userDescription::-moz-selection
+    background: hilite_orange;
+    color: white;
+  h2::-webkit-selection, .userDescription::-webkit-selection
+    background: hilite_orange;
+    color: white;
+  h2::-ms-selection, .userDescription::-ms-selection
+    background: hilite_orange;
+    color: white;
+
+  .logoHolder
+    width: 90px;
+    margin: 10px auto 0 auto;
+
+  .logo
+    width: 90px;
+    height: 90px;
+    background-color: hilite_orange;
+    border-radius: 50%;
+    webkit-border-radius: 50%;
+    moz-border-radius: 50%;
+    ms-border-radius: 50%;
+    border: solid 2px white;
+
+  .logo.inner
+      width: 84px; height: 84px;
+      margin: 1px;
+      text-align: center;
+      background: transparent;
+
+      img 
+        margin: 17px 0 0 5px;
+
+  figcaption
+    .arrow-down 
+      margin: -10px 0 10px 0;
+      border-top-color: #DDD;
+
+  ul 
+    margin: 10px auto;
+    width: 261px;
+
+    li 
+      float: left; 
+      margin-right: 20px;
+
+      a
+        -webkit-transition: 0.2s ease-in-out all;
+        -moz-transition: 0.2s ease-in-out all;
+        -ms-transition: 0.2s ease-in-out all;
+        transition: 0.2s ease-in-out all;
+
+      a:hover 
+        border-color: hilite_orange;
+        color: #444;
+    li.last
+      margin-right: 0;
+
+// Content Styles
+
+section[data-role=main]
+  clear: both;
+
+  a.blogMore
+    margin-top: 20px;
+
+
+
+// Footer Styles
+
+footer
+  p 
+    font-size: 13px;

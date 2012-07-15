@@ -1,0 +1,107 @@
+// responsive.less
+
+// RESPONSIVE CLASSES
+// ------------------
+
+// Hide from screenreaders and browsers
+// Credit: HTML5 Boilerplate
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+// Visibility utilities
+
+// For desktops
+.visible-phone     { display: none !important; }
+.visible-tablet    { display: none !important; }
+.visible-desktop   { } // Don't set initially
+.hidden-phone      { }
+.hidden-tablet     { }
+.hidden-desktop    { display: none !important; }
+
+// Phones only
+@media (max-width: 767px) {
+  // Show
+  .visible-phone     { display: inherit !important; } // Use inherit to restore previous behavior
+  // Hide
+  .hidden-phone      { display: none !important; }
+  // Hide everything else
+  .hidden-desktop    { display: inherit !important; }
+  .visible-desktop   { display: none !important; }
+}
+
+// Tablets & small desktops only
+@media (min-width: 768px) and (max-width: 979px) {
+  // Show
+  .visible-tablet    { display: inherit !important; }
+  // Hide
+  .hidden-tablet     { display: none !important; }
+  // Hide everything else
+  .hidden-desktop    { display: inherit !important; }
+  .visible-desktop   { display: none !important ; }
+}
+
+// UP TO LANDSCAPE PHONE
+// ---------------------
+
+@media (max-width: 480px) {
+
+  
+}
+
+// LANDSCAPE PHONE TO SMALL DESKTOP & PORTRAIT TABLET
+// --------------------------------------------------
+
+@media (max-width: 767px) {
+  
+
+}
+
+@media (min-width: 481px) {
+
+  // Set our content container.
+  .container {
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+    padding: 0 10px;
+  }	
+
+  #siteHeader {
+    .logoHolder { margin: 0; float: left; }
+  	.logo { 
+  		float: left;
+  		margin: 10px 0 0 0;
+  	}
+  	figcaption { float: left; margin-left: 20px; padding-top: 16px; }
+  	h2 {
+  		float: left;
+  		margin-right: 8px;
+  	}
+  	.userDescription {
+		float: left;
+		margin-top: 13px;
+  	}
+  	ul { clear: left; margin-left: 0 }
+  }
+
+
+}
+
+// PORTRAIT TABLET TO DEFAULT DESKTOP
+// ----------------------------------
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+  
+}
+
+// LARGE DESKTOP & UP
+// ------------------
+
+@media (min-width: 1200px) {
+
+
+}

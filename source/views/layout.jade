@@ -1,0 +1,63 @@
+!!! 5
+//if lt IE 7 ]><html class="ie ie6" lang="en">
+//if IE 7 ]><html class="ie ie7" lang="en">
+//if IE 8 ]><html class="ie ie8" lang="en">
+// [if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]
+head
+  meta(charset='utf-8')
+  title Jacob Gable - Developer, Amateur Philosopher, Young Punk 
+  meta(name='description', content='The website of Jacob Gable; Software Developer, Amateur Philosopher, Young Punk')
+  meta(name='author', content='Jacob Gable')
+  // Mobile Specific
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+  link(href="http://fonts.googleapis.com/css?family=Lato:300,900", rel="stylesheet", type="text/css")
+
+  // CSS
+  // TODO: Pull normalize.css from other CDN
+  != css('obtuse')
+  != css('app')
+  != css('responsive')
+
+  // Modernizr
+  != js("modernizr")
+body
+  header#siteHeader
+    .container 
+      figure
+        .logoHolder
+          a(href="/", title="")
+            .logo
+              .logo.inner
+                img(src="/img/burst.svg", title="Bursting", alt="Bursting", width="60%", height="60%")
+        figcaption 
+          h2 Jacob Gable
+          .userDescription #{ motto }
+          ul
+            li
+              a(href="/about", title="Get to know me") About
+            li
+              a(href="/blog", title="Jacob Gable's Blog") Blog
+            li
+              a(href="/projects", title="See some recent projects") Projects
+            li.last
+              a(href="https://github.com/jgable", title="Jacob Gable on Github", target="_blank") Github
+
+  section(data-role="main")
+    .container
+      block content
+
+  // jQuery 1.7
+  != js('//cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js')
+  // Site common js.
+  != js('app')
+
+  block scripts
+
+  footer
+    .container
+      p Built with love and a splash of hardcore gangsta rap in Chicago, IL.
+        |   Design based on <a href="http://dcurt.is" title="Dustin Curtis' Blog" target="_blank">Dustin Curtis'</a> <a href="https://svbtle.com/" title="The essence of blogging" target="_blank">Svbtle</a>.<br />
+        | It's all yours under <a href="http://creativecommons.org/publicdomain/zero/1.0/" title="Creative Commons License">Creative Commons CC0</a>.  No attribution required.
+
+|</html>
