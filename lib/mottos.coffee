@@ -13,7 +13,7 @@ MottoSchema = new Schema
 Motto = mongoose.model "Motto", MottoSchema
 
 # Connecting to mongoose.
-mongoose.connect "mongodb://localhost/jacobgable_com"
+mongoose.connect "mongodb://127.0.0.1/jacobgable_com"
 
 # Some Helper functions...
 random = (min = 0, max = 1) ->

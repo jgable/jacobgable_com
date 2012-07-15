@@ -20,7 +20,7 @@ PostSchema = new Schema
 Post = mongoose.model "Post", PostSchema
 
 # Connecting to mongoose.
-mongoose.connect "mongodb://localhost/jacobgable_com"
+mongoose.connect "mongodb://127.0.0.1/jacobgable_com"
 
 # Helpers
 createSlug = (text) ->
