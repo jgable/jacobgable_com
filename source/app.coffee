@@ -1,8 +1,10 @@
+require 'coffee-script'
 express = require 'express'
 stylus = require 'stylus'
 assets = require 'connect-assets'
 Mottos = require "./lib/mottos"
 Posts = require "./lib/Posts"
+secrets = require "./lib/secrets"
 
 # Settings
 settings = 
@@ -11,7 +13,8 @@ settings =
 # Express Config
 app = express()
 app.use express.cookieParser()
-app.use express.session({ secret: "Salty Dog" })
+app.use express.session
+  secret: secrets.salt
 app.use express.static(__dirname + '/public')
 app.use assets()
 
