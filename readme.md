@@ -17,6 +17,15 @@ This is my personal sites source code.  It's based on Dustin Curtis' Svbtle layo
 - Markdown for blog posts
 - BCrypt for pass hashing
 
+## Installing for Development
+
+- [Install Node.js](https://github.com/joyent/node/wiki/Installation)
+- Clone this repo: `git clone https://github.com/jgable/jacobgable_com.git`
+- Install the packages: `npm install`
+- Start the mongoDB: `cake data`
+- Run the tests: `cake test`
+- Start the server: `cake dev`
+
 ## Dev Notes
 
 - Use `mongod --dbpath ./data` to start the mongo database.
