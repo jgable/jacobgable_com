@@ -16,5 +16,7 @@ npm-debug.log
 
 *.sublime-*
 
+secrets.*
+
 data/*
 node_modules
