@@ -126,7 +126,7 @@ describe "jacobgable.com blog content", ->
   it "has a landing page that lists recent blog posts", -> true
   it "lets people see earlier blog posts", -> true
   it "lets users click on a post to see the post in detail", -> true
-  it "has an admin area that is password protected"
+  it "has an admin area that is password protected", -> true
   it "lists all drafts on the left, and published posts on the right", -> true
   it "allows me to put blog post ideas up before publishing (drafts)"
   it "allows me to create blog posts in markdown"
@@ -134,5 +134,5 @@ describe "jacobgable.com blog content", ->
   it "has google analytics"
 
 describe "jacobgable.com blog extras", ->
-  it "can calculate summaries"
   it "lets users give kudos"
+  it "uses disqus for comments"

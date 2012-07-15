@@ -14,6 +14,7 @@ settings =
 
 # Express Config
 app = express()
+app.use express.bodyParser()
 app.use express.cookieParser secrets.salt
 app.use express.session
   key: secrets.cookieKey
@@ -45,8 +46,10 @@ blogPageRender = (req, resp) ->
       pageNum: pageNum
 
 # Basic Auth Checking
-checkLoggedIn = (req, resp) ->
+checkLoggedIn = (req, resp, next) ->
   resp.redirect "/login" unless req.session.loggedin
+
+  do next
 
 # Routes
 app.get '/', (req, resp) -> 
@@ -78,19 +81,19 @@ app.get "/blog/:slug", (req, resp) ->
 
 app.get "/login", (req, resp) ->
   
-  # Keep the return_url if passed in; but we're ignoring it below.
-  if req.param["return_url"]
-    req.session.return_url = req.param["return_url"]
+  resp.redirect "/blog/admin" if req.session.loggedin
 
   resp.render "login"
     message: ""
 
 app.post "/login", (req, resp) ->
-  pwd = req.param["password"]
+  pwd = req.param["password"] or req.body["password"] or ""
+
   # TODO: bcrypt the hash
-  if pwd && crypto.createHash('md5').update(pwd).digest('hex') == secrets.adminPassHash
+  pwdHash = crypto.createHash('md5').update(pwd).digest('hex')
+  if pwd &&  pwdHash == secrets.adminPassHash
     req.session.loggedin = true
-    resp.render "admin"
+    resp.redirect "/blog/admin"
   else
     resp.render "login",
       message: "Incorrect Password"

@@ -1,11 +1,11 @@
 extends admin_layout
 
 block content
-  h1 Hold Up...
+  h2 Hold Up...
 
   if message
     p(style="color: red; font-weight: bold") #{message}
 
   form#loginForm(action="/login", method="post")
     label(for="password") Password
-    input#password(name="password", placeholder="Open Sesame!", type="text")
+    input#password(name="password", placeholder="Open Sesame!", type="password")
