@@ -2,7 +2,7 @@
 
 This is my personal sites source code.  It's based on Dustin Curtis' Svbtle layout and markdown based blogging platform.  It uses some of the styles from the Obtvse clone.
 
-[![Build Status](https://secure.travis-ci.org/[jgable]/[jacobgable_com].png)](http://travis-ci.org/[jgable]/[jacobgable_com])
+[![Build Status](https://secure.travis-ci.org/jgable/jacobgable_com.png)](http://travis-ci.org/jgable/jacobgable_com)
 
 ## Technologies
 
