@@ -16,37 +16,65 @@ startCmd = pkg.scripts.start
 log = (message, color, explanation) ->
   console.log color + message + reset + ' ' + (explanation or '')
 
-build = (watch, callback) ->
-  if typeof watch is 'function'
-    callback = watch
-    watch = false
-  options = ['-c', '-o', 'lib', 'assets/js']
-  options.unshift '-w' if watch
+# Nothing to build here, don't need extra js files around.
+build = (callback) ->
+  callback?()
 
-  coffee = spawn 'coffee', options
-  coffee.stdout.on 'data', (data) -> print data.toString()
-  coffee.stderr.on 'data', (data) -> log data.toString(), red
-  coffee.on 'exit', (status) -> callback?() if status is 0
-
-spec = (callback) ->
-  options = ['spec', '--coffee']
-  spec = spawn 'jasmine-node', options
-  spec.stdout.on 'data', (data) -> print data.toString()
-  spec.stderr.on 'data', (data) -> log data.toString(), red
+# mocha test
+test = (callback) ->
+  options = [
+    '--compilers'
+    'coffee:coffee-script'
+    '--colors'
+    '--require'
+    'should'
+    '--require'
+    './server'
+  ]
+  spec = spawn 'mocha', options
+  spec.stdout.pipe process.stdout 
+  spec.stderr.pipe process.stderr
   spec.on 'exit', (status) -> callback?() if status is 0
-
 
 task 'docs', 'Generate annotated source code with Docco', ->
   fs.readdir 'src', (err, contents) ->
     files = ("src/#{file}" for file in contents when /\.coffee$/.test file)
     docco = spawn 'docco', files
-    docco.stdout.on 'data', (data) -> print data.toString()
-    docco.stderr.on 'data', (data) -> log data.toString(), red
+    docco.pipe process.stdout
+    docco.stdout.pipe process.stdout
+    docco.stderr.pipe process.stderr
     docco.on 'exit', (status) -> callback?() if status is 0
 
 
 task 'build', ->
   build -> log ":)", green
 
-task 'spec', 'Run Jasmine-Node', ->
-  build -> spec -> log ":)", green
+task 'spec', 'Run Mocha tests', ->
+  test -> log ":)", green
+
+task 'test', 'Run Mocha tests', ->
+  test -> log ":)", green
+
+task 'data', 'Start database', ->
+  options = ["--dbpath", "./data"]
+  mongo = spawn 'mongod', options
+  mongo.stdout.pipe process.stdout
+  mongo.stderr.pipe process.stderr
+  log "Started Mongo", green
+
+task 'dev', 'start dev env', ->
+  # TODO: Start mongo?
+
+  # watch_coffee
+  options = ['-c', '-b', '-w', '-o', 'lib']
+  coffee = spawn './node_modules/coffee-script/bin/coffee', options
+  coffee.stdout.pipe process.stdout
+  coffee.stderr.pipe process.stderr
+  log 'Watching coffee files', green
+  # watch_js
+  supervisor = spawn 'node', ['./node_modules/supervisor/lib/cli-wrapper.js','-w','app,views', '-e', 'coffee|js|jade', 'server']
+  supervisor.stdout.pipe process.stdout
+  supervisor.stderr.pipe process.stderr
+  log 'Watching js files and running server', green
+
+  
