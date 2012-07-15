@@ -11,6 +11,7 @@
     , "stylus": "0.27.0"
     , "nib": "0.4.1"
     , "markdown": "0.3.1"
+    , "less": "1.3.x"
     , "marked": "0.2.x"
     , "mongoose": "2.7.x"
     , "slug": "0.2.x"
@@ -18,8 +19,6 @@
   }
   , "scripts": {
     "start": "node server.js",
-    "initMottos": "node data.js mottos",
-    "initPosts": "node data.js posts",
     "test": "mocha --require should --compilers coffee:coffee-script --colors"
   }
   , "devDependencies": {

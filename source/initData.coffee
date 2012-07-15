@@ -8,10 +8,11 @@ log = (require "logging").from(__filename)
 args = process.argv.splice 2
 
 # Load from parameters or fall back to posts
-initType = args[0] || "posts"
+initType = args[0] or "posts"
 
 init = 
   mottos: ->
+    # Jacob Gable ...
     txts = [
       "sees angels in the architecture.", 
       "just wants to love you.", 

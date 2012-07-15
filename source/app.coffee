@@ -1,10 +1,12 @@
 require 'coffee-script'
 express = require 'express'
-stylus = require 'stylus'
+crypto = require 'crypto'
 assets = require 'connect-assets'
 Mottos = require "./lib/mottos"
 Posts = require "./lib/Posts"
 secrets = require "./lib/secrets"
+
+MemoryStore = express.session.MemoryStore
 
 # Settings
 settings = 
@@ -12,9 +14,12 @@ settings =
 
 # Express Config
 app = express()
-app.use express.cookieParser()
+app.use express.cookieParser secrets.salt
 app.use express.session
+  key: secrets.cookieKey
   secret: secrets.salt
+  store: new MemoryStore
+    reapInterval: 60000 * 10 # 60 Mins
 app.use express.static(__dirname + '/public')
 app.use assets()
 
@@ -39,6 +44,10 @@ blogPageRender = (req, resp) ->
       posts: posts or []
       pageNum: pageNum
 
+# Basic Auth Checking
+checkLoggedIn = (req, resp) ->
+  resp.redirect "/login" unless req.session.loggedin
+
 # Routes
 app.get '/', (req, resp) -> 
   mottoRender resp
@@ -53,7 +62,7 @@ app.get "/blog", blogPageRender
 
 app.get "/blog/page/:pageNum", blogPageRender
 
-app.get "/blog/admin", (req, resp) ->
+app.get "/blog/admin", checkLoggedIn, (req, resp) ->
   # TODO: Authenticate
   Posts.List (posts) ->
     resp.render 'admin',
@@ -66,6 +75,29 @@ app.get "/blog/:slug", (req, resp) ->
   Posts.BySlug req.param("slug"), (post) ->
     mottoRender resp, "post",
       post: post or {}
+
+app.get "/login", (req, resp) ->
+  
+  # Keep the return_url if passed in; but we're ignoring it below.
+  if req.param["return_url"]
+    req.session.return_url = req.param["return_url"]
+
+  resp.render "login"
+    message: ""
+
+app.post "/login", (req, resp) ->
+  pwd = req.param["password"]
+  # TODO: bcrypt the hash
+  if pwd && crypto.createHash('md5').update(pwd).digest('hex') == secrets.adminPassHash
+    req.session.loggedin = true
+    resp.render "admin"
+  else
+    resp.render "login",
+      message: "Incorrect Password"
+  
+app.get "/logout", (req, resp) ->
+  req.session.loggedin = false
+  resp.redirect "/"
 
 port = process.env.VMC_APP_PORT or 3000
 
