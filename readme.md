@@ -15,7 +15,6 @@ This is my personal sites source code.  It's based on Dustin Curtis' Svbtle layo
 - Less
 - Jade Templates
 - Markdown for blog posts
-- BCrypt for pass hashing
 
 ## Installing for Development
 
