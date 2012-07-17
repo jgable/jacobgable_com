@@ -3,7 +3,8 @@ extends layout
 block content
   article
     h2 
-      a(href="/blog/#{post.slug}", title="#{post.title}") #{post.title}
-    .content #{post.content}
+      a(href="/blog/#{post.slug}", title="#{post.title}", style="text-underline: none; border: solid 0px transparent") #{post.title}
+    .content!= post.content
+    a.button(href="/blog", title="Back to blog") Back to blog
 
   

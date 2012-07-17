@@ -8,8 +8,8 @@ block content
     each post in posts
       article
         h2 
-          a(href="/blog/#{post.slug}", title="#{post.title}") #{post.title}
-        .content #{post.content}
+          a(href="/blog/#{post.slug}", title="#{post.title}")!= post.title
+        .content!= post.content
     if posts.length > 2
       a.button.blogMore(href="/blog/page/#{(pageNum|0)+1}", title="Earlier Posts") More
   

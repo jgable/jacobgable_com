@@ -1,0 +1,21 @@
+extends admin_layout
+
+block content
+
+  .post_buttons
+    a.button(href="/blog/admin") <
+    a#save.button(href="#") Save
+
+  form#new_post.new_post(action="/blog/draft", method="post")
+    
+    #post-editor
+      #text-title.expandingArea
+        textarea(cols="40", id="title", name="title", placeholder="Title here", rows="1")
+      fieldset.markdown
+        #text-content.expandingArea
+          textarea(cols="40", id="markdown", name="markdown", placeholder="Write post here", rows="20")
+
+    #post-preview
+
+block scripts
+  != js("postHelpers")

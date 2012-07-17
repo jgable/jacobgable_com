@@ -89,6 +89,13 @@ code {
     max-width: 100%;
     height: auto;
 }
+
+article {
+    .content {
+        min-height: 400px;
+    }
+}
+
 #publish-bar {
     position: fixed;
     bottom: 0;
@@ -371,14 +378,19 @@ fieldset.markdown {
     left: -60px;
     background: url(/img/markdown.png) no-repeat top left;
 }
+.post_buttons {
+    height: 60px;
+    a { float: left; margin-right: 10px;}
+
+}
 #text-title {
-    margin: 23px 0;
+    
 }
 #post_title {
     width: 100%;
     border: none;
     background: none;
-    line-height: 45px;
+    line-height: 35px;
 }
 #post_content {
     border: none;
@@ -397,9 +409,7 @@ form .permalink {
     display: none;
 }
 #split #post-editor {
-    margin-left: -25%;
-    left: 50%;
-    width: 600px;
+    
 }
 #split.preview #post-preview {
     display: block;
@@ -410,9 +420,6 @@ form .permalink {
     width: 50%}
 .split-section {
     width: 50%;
-    position: fixed;
-    left: 0;
-    top: 0;
     padding: 0 20px 100px;
     height: 100%;
     overflow: scroll;
@@ -423,8 +430,6 @@ form .permalink {
 #post-preview {
     background: #f0f4fc;
     border-left: 1px solid #dbe3f1;
-    right: 0;
-    left: auto;
 }
 .admin-view {
     font-size: 11px;

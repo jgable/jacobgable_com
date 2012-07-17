@@ -37,7 +37,7 @@ init =
   posts: ->
     count = 10
     for idx in [1..count + 1]
-      Posts.NewDraft "test Post #{idx}", (draft) ->
+      Posts.NewDraft "test Post #{idx}", "# Test Header \n\n Some test content." (draft) ->
         
         updates = 
           publish: true

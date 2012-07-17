@@ -27,11 +27,13 @@ createSlug = (text) ->
   slug text
 
 Posts = 
-  NewDraft: (title, cb) ->
+  NewDraft: (title, markdown, cb) ->
     draft = new Post
     draft.title = title
     draft.slug = createSlug title
-    draft.markdown = draft.content = title + "..."
+    draft.markdown = markdown or title
+
+    draft.content = marked draft.markdown
 
     draft.publish = false
 
@@ -63,6 +65,9 @@ Posts =
         if key == "markdown"
           foundPost.content = marked val
 
+        if key == "publish" and val is true
+          foundPost.publishDate = new Date
+
       # Save the post with the updated values.
       foundPost.save (err) ->
         throw err unless !err
@@ -76,8 +81,11 @@ Posts =
 
     qry = Post.find {}
 
+    now = new Date
+    today = new Date now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59
+
     qry.where 'publish', true
-    qry.where('publishDate').lte(new Date)
+    qry.where('publishDate').lte(today)
 
     qry.sort "publishDate", -1
 
@@ -113,6 +121,12 @@ Posts =
   RemoveWhere: (pred, cb) ->
     Post.find().$where(pred).remove (err) ->
       throw err unless !err
+
+      do cb
+
+  DeleteBySlug: (slug, cb) ->
+    Post.find({slug: slug}).remove (err) ->
+      throw err if err
 
       do cb
 

@@ -60,7 +60,7 @@ describe "jacobgable.com blog data", ->
   it "can create Drafts", (done) ->
     should.exist Posts.NewDraft
 
-    Posts.NewDraft "test New Draft", (draft) ->
+    Posts.NewDraft "test New Draft", "# Post Header \n\n Some content for this post" (draft) ->
       errIf draft, "draft is null"
 
       currDraft = draft
@@ -128,7 +128,7 @@ describe "jacobgable.com blog content", ->
   it "lets users click on a post to see the post in detail", -> true
   it "has an admin area that is password protected", -> true
   it "lists all drafts on the left, and published posts on the right", -> true
-  it "allows me to put blog post ideas up before publishing (drafts)"
+  it "allows me to put blog post ideas up before publishing (drafts)", -> true
   it "allows me to create blog posts in markdown"
   it "is easy to include gists"
   it "has google analytics"
