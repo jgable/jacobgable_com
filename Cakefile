@@ -45,6 +45,25 @@ task 'docs', 'Generate annotated source code with Docco', ->
     docco.stderr.pipe process.stderr
     docco.on 'exit', (status) -> callback?() if status is 0
 
+option '-c', '--cookieKey [key]', 'The cookie key to use'
+option '-s', '--salt [salt]', 'The salt value to use'
+option '-a', '--adminHash [hash]', 'The admin hash to use'
+
+task 'secret', 'create secrets file', (options) ->
+  cookieKey = options['cookieKey'] || "SomeCookieKey"
+  salt = options['salt'] || "SomeSalt"
+  adminHash = options['adminHash']
+
+  secretCode = """
+               module.exports = 
+                 cookieKey: "#{cookieKey}"
+                 salt: "#{salt}"
+                 adminPassHash: "#{adminHash}"
+               """
+  
+  fs.writeFileSync("./lib/secrets.coffee", secretCode)
+  log ":)", green
+  
 
 task 'build', ->
   build -> log ":)", green
