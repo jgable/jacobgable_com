@@ -135,4 +135,4 @@ describe "jacobgable.com blog content", ->
 describe "jacobgable.com blog extras", ->
   it "can include gists in posts"
   it "lets readers give kudos"
-  it "uses disqus for comments"
+  it "uses disqus for comments", -> true
