@@ -2,7 +2,6 @@ require 'coffee-script'
 express = require 'express'
 crypto = require 'crypto'
 assets = require 'connect-assets'
-errorface = require "errorface"
 
 Mottos = require "./lib/mottos"
 Posts = require "./lib/Posts"
