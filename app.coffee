@@ -2,6 +2,8 @@ require 'coffee-script'
 express = require 'express'
 crypto = require 'crypto'
 assets = require 'connect-assets'
+errorface = require "errorface"
+
 Mottos = require "./lib/mottos"
 Posts = require "./lib/Posts"
 secrets = require "./lib/secrets"
@@ -140,7 +142,7 @@ app.post "/login", (req, resp) ->
 
   # TODO: bcrypt the hash
   pwdHash = crypto.createHash('md5').update(pwd).digest('hex')
-  if pwd &&  pwdHash == secrets.adminPassHash
+  if pwd && pwdHash == secrets.adminPassHash
     req.session.loggedin = true
     resp.redirect "/blog/admin"
   else
@@ -150,6 +152,9 @@ app.post "/login", (req, resp) ->
 app.get "/logout", (req, resp) ->
   req.session.loggedin = false
   resp.redirect "/"
+
+app.get "/*", (req, resp) ->
+  resp.send 404
 
 port = process.env.VMC_APP_PORT or 3000
 
