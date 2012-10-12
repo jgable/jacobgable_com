@@ -26,14 +26,14 @@ Mottos =
     newMotto.text = txt
 
     newMotto.save (err) ->
-      throw err unless !err
+      throw err if err
 
       # callBack with newMotto
       cb newMotto
 
   All: (cb) ->
     Motto.find {}, (err, mots) ->
-      throw err unless !err
+      throw err if err
       
       # Callback with returned mottos
       cb mots
@@ -48,9 +48,9 @@ Mottos =
 
   RemoveWhere: (pred, cb) ->
     Motto.find().$where(pred).remove (err) ->
-      do cb unless err
+      throw err if err
 
-      throw err
+      cb()
 
 # Export our public API
 module.exports = Mottos

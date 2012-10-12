@@ -37,12 +37,13 @@ describe "jacobgable.com mottos", ->
   		do done
 
   it "can reset test Mottos we've created", (done) ->
-  	should.exist Mottos.RemoveWhere
-  	
-  	isTestMotto = ->
-  		@text.slice(0, 4) == "test"
+    should.exist Mottos.RemoveWhere
+    
+    isTestMotto = ->
+      @text.slice(0, 4) == "test"
 
-  	Mottos.RemoveWhere isTestMotto, done
+    Mottos.RemoveWhere isTestMotto, ->
+      done()
 
 describe "jacobgable.com content", ->
 	it "has a stylish design based on Dustin Curtis' svbtl layout", -> true
