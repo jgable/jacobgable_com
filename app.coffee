@@ -152,8 +152,12 @@ app.get "/logout", (req, resp) ->
   req.session.loggedin = false
   resp.redirect "/"
 
+app.get "/error", (req, resp) ->
+  app.doesntExist()
+
 app.get "/*", (req, resp) ->
-  resp.send 404
+  # resp.send 404
+  throw new Error "Not Found"
 
 port = process.env.VMC_APP_PORT or 3000
 
